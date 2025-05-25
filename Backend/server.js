@@ -1,6 +1,7 @@
 const express = require('express')
 require(`dotenv`).config();
 const authRoutes = require('./routes/authRoutes')
+const postRoute = require('./routes/postRoute')
 const mongoose = require('mongoose');
 
 //express app
@@ -15,6 +16,8 @@ app.use(express.json());
 
 //routes
 app.use('/api/auth' ,authRoutes )
+app.use('/api/admin/post' , postRoute)
+
 app.get('/' , (req ,res) =>{
     res.json({mssg:"welcome to the backend admin"})
 })

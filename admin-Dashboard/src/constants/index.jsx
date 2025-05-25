@@ -31,16 +31,7 @@ export const navbarLinks = [
                 icon : StickyNote,
                 path : "/PostManagement"
             },
-            // {
-            //     label: "New customer",
-            //     icon: UserPlus,
-            //     path: "/new-customer",
-            // },
-            // {
-            //     label : "Verified customers",
-            //     icon : UserCheck,
-            //     path : "/verified-customers",
-            // },
+           
         
         ],
     },
@@ -58,11 +49,7 @@ export const navbarLinks = [
                 path : "/addUser",
 
             },
-            // {
-            //     label : "Inventory",
-            //     icon : ShoppingBag,
-            //     path : "/inventory",
-            // },
+           
         
         ],
     },

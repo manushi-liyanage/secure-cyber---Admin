@@ -4,16 +4,7 @@ const {body} = require('express-validator')
 
 const router = express.Router()
 
-// router.post('/' , async (req , res)=>{
-//     const {name , email, password} = req.body
 
-//     try{
-//         const auth = await Auth.create({name , email , password})
-//         res.status(200).json(auth)
-//     }catch(error){
-//         res.status(400).json({error :error.message})
-//     }
-// })
 
 
 router.post('/register', [

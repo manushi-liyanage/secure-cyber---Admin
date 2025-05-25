@@ -9,7 +9,7 @@ export const Footer = ()  => {
                     
                 >
                     Privacy Policy
-                </a>
+                </a>  
                 <a 
                    href="#"
                    className="link"

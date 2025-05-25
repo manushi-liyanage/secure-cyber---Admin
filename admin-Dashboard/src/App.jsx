@@ -34,13 +34,11 @@ function App() {
             {
                 path: "PostManagement",
                 element: <PostManagement/>,
-                     
-                     
-                    
+                       
             },
             {
                 path: "new-customer",
-                element: <h1 className="title">New Customer</h1>,
+                 element: <h1 className="title">New Customer</h1>,
             },
             {
                 path: "verified-customers",
