@@ -9,7 +9,7 @@ export const navbarLinks = [
             {
                 label :"Dashboard",
                 icon : Home,
-                path : "/",
+                path : "/dashboard",
             },
             {
                 label : "Analytics",
@@ -29,7 +29,7 @@ export const navbarLinks = [
             {
                 label : "Post Management",
                 icon : StickyNote,
-                path : "/PostManagement"
+                path : "/dashboard/PostManagement"
             },
            
         
@@ -41,7 +41,7 @@ export const navbarLinks = [
             {
                 label : "User Management",
                 icon : Users,
-                path : "/UserMangement"
+                path : "/dashboard/user-management"
             },
             {
                 label : "Add User",
