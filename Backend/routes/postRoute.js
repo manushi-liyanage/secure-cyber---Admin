@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const authMiddleware = require('../middleware/authMiddleware');
 
 const {
   getPostsByStatus,
@@ -8,12 +9,12 @@ const {
 } = require('../controllers/postController');
 
 // 📥 View posts by moderation status
-router.get('/status', getPostsByStatus); // e.g. ?status=pending
+router.get('/status', authMiddleware, getPostsByStatus); // e.g. ?status=pending
 
 // ✅ Approve post
-router.patch('/approve/:id', approvePost);
+router.patch('/approve/:id', authMiddleware, approvePost);
 
 // ❌ Reject post
-router.patch('/reject/:id', rejectPost);
+router.patch('/reject/:id', authMiddleware, rejectPost);
 
 module.exports = router;
