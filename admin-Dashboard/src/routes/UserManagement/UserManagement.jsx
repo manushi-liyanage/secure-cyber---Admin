@@ -48,95 +48,97 @@ export default function AdminUserManagement() {
   }, []);
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Manage Users</h1>
+    <div className="flex flex-col gap-y-4 p-6">
+      <h1 className="title">Manage Users</h1>
 
       {users.length === 0 ? (
-        <p>No users found.</p>
+        <p className="text-base text-slate-600 dark:text-slate-400">No users found.</p>
       ) : (
-        <table className="w-full table-auto border">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="p-2">Name</th>
-              <th className="p-2">Email</th>
-              <th className="p-2">Verified</th>
-              <th className="p-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((u) => (
-              <tr key={u._id} className="border-t">
-                <td className="p-2">{u.name}</td>
-                <td className="p-2">{u.email}</td>
-                <td className="p-2">{u.isVerified ? "✅" : "❌"}</td>
-                <td className="p-2">
-                  {/* <button
-                    onClick={() => setEditUser(u)}
-                    className="bg-yellow-400 text-white px-3 py-1 rounded mr-2"
-                  >
-                    Edit
-                  </button> */}
-                  <button
-                    onClick={() => handleDelete(u._id)}
-                    className="bg-red-500 text-white px-3 py-1 rounded"
-                  >
-                    Delete
-                  </button>
-                </td>
+        <div className="card overflow-x-auto">
+          <table className="table">
+            <thead className="table-header">
+              <tr>
+                <th className="table-head">Name</th>
+                <th className="table-head">Email</th>
+                <th className="table-head">Verified</th>
+                <th className="table-head">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {users.map((u) => (
+                <tr key={u._id} className="table-row">
+                  <td className="table-cell">{u.name}</td>
+                  <td className="table-cell">{u.email}</td>
+                  <td className="table-cell">{u.isVerified ? "✅" : "❌"}</td>
+                  <td className="table-cell">
+                    <button
+                      onClick={() => handleDelete(u._id)}
+                      className="btn-ghost border border-red-500 text-red-500 hover:bg-red-500 hover:text-white dark:hover:bg-red-600 dark:hover:text-white"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
 
-      {/* Edit Modal
       {editUser && (
-        <div className="mt-6 border rounded p-4 bg-white shadow-md w-full max-w-md">
-          <h2 className="text-xl font-bold mb-4">Edit User</h2>
-          <label className="block mb-2">
+        <div className="card w-full max-w-md">
+          <h2 className="card-title text-xl">Edit User</h2>
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-300 mt-2">
             Name:
             <input
-              className="w-full border p-2 rounded mt-1"
+              className="input mt-1"
               value={editUser.name}
-              onChange={(e) => setEditUser({ ...editUser, name: e.target.value })}
+              onChange={(e) =>
+                setEditUser({ ...editUser, name: e.target.value })
+              }
             />
           </label>
-          <label className="block mb-2">
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-300 mt-2">
             Email:
             <input
-              className="w-full border p-2 rounded mt-1"
+              className="input mt-1"
               value={editUser.email}
-              onChange={(e) => setEditUser({ ...editUser, email: e.target.value })}
+              onChange={(e) =>
+                setEditUser({ ...editUser, email: e.target.value })
+              }
             />
           </label>
-          <label className="block mb-4">
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-300 mt-2">
             Verified:
             <select
-              className="w-full border p-2 rounded mt-1"
+              className="input mt-1"
               value={editUser.isVerified}
               onChange={(e) =>
-                setEditUser({ ...editUser, isVerified: e.target.value === "true" })
+                setEditUser({
+                  ...editUser,
+                  isVerified: e.target.value === "true",
+                })
               }
             >
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
           </label>
-          <div className="flex justify-end">
+          <div className="mt-4 flex justify-end gap-x-2">
             <button
               onClick={handleUpdate}
-              className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
+              className="btn-ghost border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white"
             >
               Save
             </button>
             <button
               onClick={() => setEditUser(null)}
-              className="bg-gray-300 text-black px-4 py-2 rounded"
+              className="btn-ghost border border-slate-300 text-slate-600 hover:bg-slate-200 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800"
             >
               Cancel
             </button>
           </div>
-        </div> */}
+        </div>
       )}
     </div>
   );

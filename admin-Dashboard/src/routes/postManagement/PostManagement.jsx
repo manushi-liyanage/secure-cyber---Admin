@@ -70,11 +70,11 @@ export default function PostManagement() {
   );
 
   return (
-    <div className="p-6 max-w-5xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">Manage Posts</h1>
+    <div className="p-6 max-w-6xl mx-auto">
+      <h1 className="text-2xl font-semibold mb-6 text-gray-800">Manage Posts</h1>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-4 items-center mb-6">
+      <div className="flex flex-wrap gap-3 items-center mb-6">
         {["pending", "approved", "rejected"].map((s) => (
           <button
             key={s}
@@ -82,8 +82,10 @@ export default function PostManagement() {
               setStatus(s);
               setFilterText("");
             }}
-            className={`px-4 py-2 rounded font-semibold ${
-              status === s ? "bg-blue-600 text-white" : "bg-gray-200 hover:bg-gray-300"
+            className={`px-4 py-2 rounded-lg font-medium transition-all duration-150 ${
+              status === s
+                ? "bg-blue-600 text-white shadow"
+                : "bg-gray-100 hover:bg-gray-200 text-gray-700"
             }`}
           >
             {s.charAt(0).toUpperCase() + s.slice(1)}
@@ -95,56 +97,62 @@ export default function PostManagement() {
           placeholder="Filter by title, email, or company..."
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}
-          className="flex-1 px-4 py-2 border rounded w-full sm:w-64"
+          className="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none w-full sm:w-72"
         />
 
         <button
           onClick={fetchPosts}
-          className="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500"
+          className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition-all duration-150"
           disabled={loading}
         >
           Refresh
         </button>
       </div>
 
-      {loading && <p>Loading posts...</p>}
+      {loading && <p className="text-gray-500">Loading posts...</p>}
       {error && <p className="text-red-600 mb-4">{error}</p>}
-      {!loading && paginatedPosts.length === 0 && <p>No posts match your filters.</p>}
+      {!loading && paginatedPosts.length === 0 && (
+        <p className="text-gray-500">No posts match your filters.</p>
+      )}
 
       {/* Posts */}
       <div className="space-y-6">
         {paginatedPosts.map((post) => (
           <div
             key={post._id}
-            className="border p-4 rounded shadow-sm bg-white"
+            className="border rounded-xl shadow-md p-5 bg-white"
           >
-            <h3 className="text-xl font-semibold mb-1">{post.title}</h3>
+            <h3 className="text-xl font-semibold text-gray-900 mb-1">{post.title}</h3>
             <p className="text-gray-700 mb-2">{post.description}</p>
-            <p className="text-sm text-gray-500 mb-1">Company: {post.company || "N/A"}</p>
-            <p className="text-sm text-gray-500 mb-2">By: {post.userId?.email || "Unknown"}</p>
+            <p className="text-sm text-gray-500">Company: {post.company || "N/A"}</p>
+            <p className="text-sm text-gray-500 mb-3">By: {post.userId?.email || "Unknown"}</p>
 
             {post.visualContent && post.visualContentType === "image" && (
               <img
                 src={post.visualContent}
                 alt="Post visual"
-                className="mb-3 max-h-48 w-full object-contain rounded"
+                className="mb-3 max-h-56 w-full object-contain rounded-lg"
               />
             )}
             {post.visualContent && post.visualContentType === "video" && (
-              <video controls src={post.visualContent} className="mb-3 max-h-48 w-full rounded" />
+              <video
+                controls
+                src={post.visualContent}
+                className="mb-3 max-h-56 w-full rounded-lg"
+              />
             )}
 
             {status === "pending" && (
-              <div className="flex gap-3">
+              <div className="flex gap-3 mt-2">
                 <button
                   onClick={() => handleAction(post._id, "approve")}
-                  className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                  className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-all duration-150"
                 >
                   Approve
                 </button>
                 <button
                   onClick={() => handleAction(post._id, "reject")}
-                  className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+                  className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-all duration-150"
                 >
                   Reject
                 </button>
@@ -156,15 +164,15 @@ export default function PostManagement() {
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex justify-center mt-6 gap-2 flex-wrap">
+        <div className="flex justify-center mt-8 gap-2 flex-wrap">
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
             <button
               key={page}
               onClick={() => setCurrentPage(page)}
-              className={`px-3 py-1 rounded ${
+              className={`px-3 py-1 rounded-lg text-sm font-medium transition ${
                 currentPage === page
-                  ? "bg-blue-600 text-white"
-                  : "bg-gray-200 hover:bg-gray-300"
+                  ? "bg-blue-600 text-white shadow"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
               {page}
@@ -175,7 +183,6 @@ export default function PostManagement() {
     </div>
   );
 }
-
 
 
 
